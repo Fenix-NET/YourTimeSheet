@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YourTimeSheet.Core\YourTimeSheet.Core.csproj" />
+  </ItemGroup>
+
 </Project>
