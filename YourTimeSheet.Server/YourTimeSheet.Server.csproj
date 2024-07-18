@@ -8,7 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YourTimeSheet.Application\YourTimeSheet.Application.csproj" />
+    <ProjectReference Include="..\YourTimeSheet.Core\YourTimeSheet.Core.csproj" />
+    <ProjectReference Include="..\YourTimeSheet.Infrastructure\YourTimeSheet.Infrastructure.csproj" />
+    <ProjectReference Include="..\YourTimeSheet.WebAPI\YourTimeSheet.WebAPI.csproj" />
   </ItemGroup>
 
 </Project>

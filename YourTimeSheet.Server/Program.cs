@@ -1,4 +1,9 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using YourTimeSheet.Server.Extensions;
+
 namespace YourTimeSheet.Server
 {
     public class Program
@@ -7,16 +12,17 @@ namespace YourTimeSheet.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
+
+            builder.Services.ConfigureAuthentication(key);
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddAuthorization();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -25,8 +31,8 @@ namespace YourTimeSheet.Server
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
