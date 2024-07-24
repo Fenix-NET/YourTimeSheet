@@ -32,7 +32,7 @@ namespace YourTimeSheet.Server.Extensions
         public static void ConfigureNpgsqlContext(this IServiceCollection services,
             IConfiguration configuration) =>
             services.AddDbContext<RepositoryContext>(opts =>
-                opts.UseNpgsql(configuration.GetConnectionString("RepoContext")));
+                opts.UseNpgsql(configuration.GetConnectionString("RepoContext"), b => b.MigrationsAssembly("YourTimeSheet.Server")));
 
         // Настройка Identity
         public static void ConfigurationIdentity(this IServiceCollection services)

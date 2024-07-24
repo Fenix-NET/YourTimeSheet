@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YourTimeSheet.Core.Entities;
 using YourTimeSheet.Core.Entities.IdentityModels;
 
 namespace YourTimeSheet.Infrastructure.Repositories
@@ -22,5 +23,6 @@ namespace YourTimeSheet.Infrastructure.Repositories
             base.OnModelCreating(builder);
         }
 
+        public DbSet<TestSheet> TestSheets { get; set; }
     }
 }
