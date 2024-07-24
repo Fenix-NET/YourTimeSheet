@@ -12,10 +12,11 @@ namespace YourTimeSheet.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
-
-            builder.Services.ConfigureAuthentication(key);
-
+            //var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
+            //builder.Services.ConfigureAuthentication(key);
+            builder.Services.ConfigureNpgsqlContext(builder.Configuration);
+            builder.Services.AddAuthentication();
+            builder.Services.ConfigurationIdentity();
             builder.Services.AddControllers();
             builder.Services.AddAuthorization();
             builder.Services.AddEndpointsApiExplorer();
