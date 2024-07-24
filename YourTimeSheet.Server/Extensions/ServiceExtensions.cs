@@ -2,6 +2,10 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.EntityFrameworkCore;
+using YourTimeSheet.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
+using YourTimeSheet.Core.Entities.IdentityModels;
 
 namespace YourTimeSheet.Server.Extensions
 {
@@ -23,6 +27,28 @@ namespace YourTimeSheet.Server.Extensions
             {
 
             });
+
+        // Настройка БД
+        public static void ConfigureNpgsqlContext(this IServiceCollection services,
+            IConfiguration configuration) =>
+            services.AddDbContext<RepositoryContext>(opts =>
+                opts.UseNpgsql(configuration.GetConnectionString("RepoContext")));
+
+        // Настройка Identity
+        public static void ConfigurationIdentity(this IServiceCollection services)
+        {
+            var builder = services.AddIdentity<User, IdentityRole>(o =>
+            {
+                o.Password.RequireDigit = true;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 8;
+                o.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<RepositoryContext>()
+            .AddDefaultTokenProviders();
+        }
 
         // Настройка Аутентификации
         public static void ConfigureAuthentication(this IServiceCollection services, byte[] key) =>

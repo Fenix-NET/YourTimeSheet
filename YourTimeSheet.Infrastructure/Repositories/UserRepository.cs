@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YourTimeSheet.Core.Contracts;
-using YourTimeSheet.Core.Entities;
+using YourTimeSheet.Core.Entities.IdentityModels;
 
 namespace YourTimeSheet.Infrastructure.Repositories
 {
