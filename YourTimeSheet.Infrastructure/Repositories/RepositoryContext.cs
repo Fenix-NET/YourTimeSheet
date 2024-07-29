@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YourTimeSheet.Core.Entities;
 using YourTimeSheet.Core.Entities.IdentityModels;
+using YourTimeSheet.Infrastructure.Repositories.Configuration;
 
 namespace YourTimeSheet.Infrastructure.Repositories
 {
@@ -21,6 +22,8 @@ namespace YourTimeSheet.Infrastructure.Repositories
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
 
         public DbSet<TestSheet> TestSheets { get; set; }
