@@ -1,7 +1,14 @@
 
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System.Text;
+using YourTimeSheet.Application.Services;
+using YourTimeSheet.Core.Contracts;
+using YourTimeSheet.Infrastructure.Hangfire;
+using YourTimeSheet.Infrastructure.Services;
 using YourTimeSheet.Server.Extensions;
 
 namespace YourTimeSheet.Server
@@ -20,6 +27,11 @@ namespace YourTimeSheet.Server
             builder.Services.AddControllers();
             builder.Services.AddAuthorization();
             builder.Services.AddEndpointsApiExplorer();
+            //builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("HangfireRedis")));
+            builder.Services.AddHangfireServices(builder.Configuration);
+            builder.Services.AddScoped<IBackgroundJobService, BackgroundJobService>();
+            builder.Services.AddScoped<IJobTestService, JobTestService>();
+            builder.Services.AddScoped<IRecurringJobManager, RecurringJobManager>();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
@@ -36,6 +48,8 @@ namespace YourTimeSheet.Server
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.UseHangfireDashboard();
 
             app.Run();
         }
