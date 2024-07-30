@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YourTimeSheet.Core.Entities
+namespace YourTimeSheet.Core.DataTransferObject
 {
-    public class TestSheet
+    public class TaskDto
     {
-        public Guid Id { get; set; }
         public string TaskName { get; set; }
-
     }
 }
