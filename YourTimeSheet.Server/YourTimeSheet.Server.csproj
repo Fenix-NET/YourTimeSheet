@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.2.3" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +24,7 @@
     <ProjectReference Include="..\YourTimeSheet.Application\YourTimeSheet.Application.csproj" />
     <ProjectReference Include="..\YourTimeSheet.Core\YourTimeSheet.Core.csproj" />
     <ProjectReference Include="..\YourTimeSheet.Infrastructure\YourTimeSheet.Infrastructure.csproj" />
+    <ProjectReference Include="..\YourTimeSheet.SharedModels\YourTimeSheet.SharedModels.csproj" />
     <ProjectReference Include="..\YourTimeSheet.WebAPI\YourTimeSheet.WebAPI.csproj" />
   </ItemGroup>
 

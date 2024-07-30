@@ -1,5 +1,6 @@
 
 using Hangfire;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -32,6 +33,10 @@ namespace YourTimeSheet.Server
             builder.Services.AddScoped<IBackgroundJobService, BackgroundJobService>();
             builder.Services.AddScoped<IJobTestService, JobTestService>();
             builder.Services.AddScoped<IRecurringJobManager, RecurringJobManager>();
+            builder.Services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq();
+            });
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
